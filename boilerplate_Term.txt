@@ -1,2 +1,16 @@
 npm init --yes
 npm install express dotenv
+npm install --save-dev nodemon ts-node typescript @types/express @types/node
+npx tsc --init
+--rootDir
+--moduleResolution
+--outDir
+
+
+==> tsconfig.json{compiler option muni}(
+    "include":["./src"]
+  }
+)
+
+//installing eslint and prettier
+npm install --save-dev eslint eslint-config-prettier prettier 
