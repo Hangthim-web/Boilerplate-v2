@@ -12,8 +12,9 @@
 //   console.log(`Example app listening on port ${port}`);
 // });
 
-
 // const add = (a:number,b:number):number => a+b;
 // console.log(add(2,2)
+//
+// const x = "hello";
 
-const x = 'hello'
+console.log('hello')

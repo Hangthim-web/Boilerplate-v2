@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/main.ts",
+    "dev": "nodemon ./src/main.ts",
+    "start": "node ./dist/app.js",
     "build": "tsc",
-    "test": "",
-    "lint": "",
-    "format": ""
+    "lint-fix": "eslint --ignore-path .eslintignore . --fix",
+    "format": "prettier --write .",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
