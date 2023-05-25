@@ -23,6 +23,8 @@ run build after this for dist folder
 //installing eslint and prettier
 npm install --save-dev eslint eslint-config-prettier prettier 
 
+
+npm install --save-dev lint-staged
 npm install husky --save-dev
 npm run prepare
 
