@@ -6,23 +6,29 @@ import jwt from 'jsonwebtoken'
 const prisma = new PrismaClient()
 export const getUser = async (user: any) => {
     const users = await prisma.user.findMany({
-        select: { id: true, address: true, name: true },
+        select: { id: true, address: true, name: true, email: true },
     })
     return users
 }
 
 export const createUser = async (user: any) => {
     const { name, email, address, password } = user
-    const createdUser = await prisma.user.create({
-        data: {
-            id: Math.ceil(Math.random() * 100),
-            name,
-            email,
-            address,
-            password: await bcrypt.hash(password as string, 10),
-        },
-    })
-    return { ...createdUser, password: undefined }
+    try {
+        const createdUser = await prisma.user.create({
+            data: {
+                id: Math.ceil(Math.random() * 100),
+                name,
+                email,
+                address,
+                password: await bcrypt.hash(password as string, 10),
+            },
+        })
+    } catch (error: any) {
+        if (error.code === 'P2002') {
+            throw Boom.forbidden('duplicate user not allowed;')
+        }
+    }
+    // return { ...createdUser, password: undefined }
 }
 export const deleteUser = async (user: any) => {
     const { id } = user
@@ -59,6 +65,8 @@ export const updateUser = async (id: string, user: any) => {
     } catch (error: any) {
         if (error.code === 'P2025') {
             throw Boom.notFound('user not found')
+        } else if (error.code === 'P2002') {
+            throw Boom.conflict('Duplicate user not allowed')
         } else {
             throw error
         }
@@ -70,7 +78,7 @@ export async function loginUser(email: string, password: string) {
         user = await prisma.user.findFirstOrThrow({ where: { email } })
     } catch (error: any) {
         if (error.code === 'P2025') {
-            throw Boom.notFound('User xaina sathi')
+            throw Boom.notFound('User not found')
         }
     }
     //compare the provided password with the stored hash password
