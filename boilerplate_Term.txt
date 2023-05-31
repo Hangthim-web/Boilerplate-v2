@@ -92,3 +92,10 @@ cros is used for integration
 
 
  
+npm i http-status-code 
+npm i http-status-code zod
+npm i @hapi/boom
+
+
+jwt package
+npm install bcrypt
