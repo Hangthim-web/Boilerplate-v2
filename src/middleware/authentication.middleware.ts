@@ -39,7 +39,7 @@ export function authenticateToken(
 export function isAdmin(req: Request, res: Response, next: NextFunction) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const { user }: { user: any; isAdmin: truex } = req
+    const { user }: { user: any; isAdmin: true } = req
 
     if (user && user.isAdmin) {
         next() // Proceed to the next middleware or route handler

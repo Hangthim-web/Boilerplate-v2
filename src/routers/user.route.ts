@@ -13,20 +13,21 @@ import { authenticateToken } from '../middleware/authentication.middleware'
 import { isAdmin } from '../middleware/authentication.middleware'
 const router = Router()
 
-router.get('/', getUser)
+router.get('/', authenticateToken, getUser)
 
 router.post('/', validate(createPostDto), postController.createUser)
 
-router.delete('/:id', authenticateToken, deleteUser)
+router.delete('/:id', authenticateToken, isAdmin, deleteUser)
 router.patch(
     '/:id',
     authenticateToken,
+    isAdmin,
     validate(createPostDto),
     postController.updateUser
 )
 
 // router.post('/signup')
-router.post('/login', authenticateToken, loginUser)
+router.post('/login', loginUser)
 // router.get('/login', loginUser)
 
 export default router

@@ -21,8 +21,8 @@ export const createUser = async (
     next: NextFunction
 ) => {
     try {
-        await userService.createUser(req.body)
-        res.send('data inserted successfully')
+        const createdUser = await userService.createUser(req.body)
+        res.status(200).send(createdUser)
     } catch (e) {
         next(e)
     }
@@ -34,8 +34,8 @@ export const deleteUser = async (
     next: NextFunction
 ) => {
     try {
-        await userService.deleteUser(req.params)
-        res.send('data deleted successfully')
+        const deletedUser = await userService.deleteUser(req.params)
+        res.status(200).send(deleteUser)
     } catch (err) {
         next(err)
     }
